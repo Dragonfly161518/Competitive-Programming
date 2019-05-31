@@ -16,7 +16,6 @@ lli dp(int u,int step) {
     if(chk[u][step%t]) return 1e9+21;
     chk[u][step%t] = 1;
     lli MIN = 1e9+21;
-    cout << " "<< u << " -> " << G[u].size() << endl;
     for(int i=0;i<G[u].size();i++) {
         lli doo = dp(G[u][i].first,step+1) + G[u][i].second;
         chk[u][(step+1)%]
