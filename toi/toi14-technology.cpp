@@ -9,12 +9,16 @@ int dfs(int u) {
     if(develop[u] == 2) {
         return 0;
     } else if(develop[u] == 1) {
-        return 200000;
+        return 2000000;
     }
     develop[u] = 1;
     int sum = 0;
     for(auto v: G[u]) {
-        sum += dfs(v);
+        int dev = dfs(v);
+        if(sum + dev > t) {
+            return sum+dev;
+        }
+        else sum += dev;
     }
     develop[u] = 2;
     return sum + 1;
@@ -36,22 +40,14 @@ int main() {
         for(auto node: level[i]) {
             dp[i] += dfs(node);
         }
+        if(dp[i] > t) {
+            if(i-1 == 0) printf("-1");
+            else
+            printf("%d",i-1);
+            return 0;
+        }
         develop[i] = 2;
     }
-    int MAX = -1;
-    for(int i=1;i<=k;i++) {
-        if(dp[i] > t) break;
-        MAX = i;
-    }
-    printf("%d",MAX);
+    printf("%d",k);
     return 0;
 }
-/*
-6 5 4
-1 0
-5 1 1
-2 1 2
-4 2 3 5
-3 1 6
-2 1 1
-*/
